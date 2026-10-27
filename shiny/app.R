@@ -36,8 +36,8 @@ ui <- fluidPage(
     sidebarPanel(width = 3,
       div(class = "lab", "Simulate"),
       sliderInput("n", "Students", min = 10, max = 500, value = 60, step = 10, ticks = FALSE),
-      sliderInput("b0", "Intercept: grade at 0 hours", min = 1, max = 6, value = 2, step = 0.5, ticks = FALSE),
-      sliderInput("b1", "Slope: grade points per hour", min = 0, max = 1, value = 0.4, step = 0.05, ticks = FALSE),
+      sliderInput("b0", "Grade at 0 hours", min = 1, max = 6, value = 2, step = 0.5, ticks = FALSE),
+      sliderInput("b1", "Grade points per hour", min = 0, max = 1, value = 0.4, step = 0.05, ticks = FALSE),
       actionButton("newclass", "New class")
     ),
     mainPanel(width = 9,
