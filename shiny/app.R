@@ -9,7 +9,9 @@ library(ggplot2)
 
 RED <- "#CF2C3F"; INK <- "#1d1d1f"; GREY <- "#5f5f66"; LIGHT <- "#a3a3aa"
 PASS <- 60; NOISE <- 0.5; SEED <- 116; HRS <- 4:8
-lecture_class <- if (file.exists("../data/students.csv")) read.csv("../data/students.csv") else NULL
+# The lecture class: shiny/students.csv when the app is deployed on its own, ../data/students.csv in the repo.
+class_file <- Filter(file.exists, c("students.csv", "../data/students.csv"))
+lecture_class <- if (length(class_file)) read.csv(class_file[1]) else NULL
 
 css <- "
   body { font-family: Inter, Helvetica, Arial, sans-serif; color: #1d1d1f; background: #ffffff; }
@@ -38,7 +40,8 @@ ui <- fluidPage(
       sliderInput("n", "Students", min = 10, max = 500, value = 60, step = 10, ticks = FALSE),
       sliderInput("b0", "Grade at 0 hours", min = 1, max = 6, value = 2, step = 0.5, ticks = FALSE),
       sliderInput("b1", "Grade points per hour", min = 0, max = 1, value = 0.4, step = 0.05, ticks = FALSE),
-      actionButton("newclass", "New class")
+      actionButton("newclass", "New class"),
+      div(class = "note", "Pass = grade 4 or better (60 points)")
     ),
     mainPanel(width = 9,
       fluidRow(
